@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile - SkillSwap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  <form id="profileForm" class="w-full max-w-md bg-white p-6 rounded shadow">
+    <h2 class="text-2xl font-semibold mb-4">Complete Your Profile</h2>
+
+    <input id="name" type="text" placeholder="Full Name" class="w-full mb-4 p-2 border rounded" required>
+    <input id="dob" type="date" class="w-full mb-4 p-2 border rounded" required>
+    <input id="qualification" type="text" placeholder="Qualification" class="w-full mb-4 p-2 border rounded" required>
+    <input id="skills" type="text" placeholder="Skills Known" class="w-full mb-4 p-2 border rounded" required>
+
+    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+      Save & Go to Dashboard
+    </button>
+  </form>
+
+  <script>
+    const existing = JSON.parse(localStorage.getItem("userProfile")) || {};
+    document.getElementById("name").value = existing.name || localStorage.getItem("signupName") || '';
+    document.getElementById("dob").value = existing.dob || '';
+    document.getElementById("qualification").value = existing.qualification || '';
+    document.getElementById("skills").value = existing.skills || '';
+
+    document.getElementById("profileForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const profileData = {
+        name: document.getElementById("name").value,
+        dob: document.getElementById("dob").value,
+        qualification: document.getElementById("qualification").value,
+        skills: document.getElementById("skills").value,
+      };
+      localStorage.setItem("userProfile", JSON.stringify(profileData));
+      localStorage.removeItem("signupName"); // clear temp name
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

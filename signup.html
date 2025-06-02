@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up - SkillSwap</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  <h2 class="text-3xl font-semibold mb-6">Create a SkillSwap Account</h2>
+  <form id="signupForm" class="w-full max-w-sm bg-white p-6 rounded shadow">
+    <input id="signupName" type="text" placeholder="Name" class="w-full mb-4 p-2 border rounded" required>
+    <input id="signupEmail" type="email" placeholder="Email" class="w-full mb-4 p-2 border rounded" required>
+    <input id="signupPassword" type="password" placeholder="Password" class="w-full mb-4 p-2 border rounded" required>
+    <button type="submit" class="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600">Sign Up</button>
+  </form>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("signupName").value;
+      const email = document.getElementById("signupEmail").value;
+
+      localStorage.setItem("loggedInUser", email); // Set for session
+      localStorage.setItem("signupName", name);    // Temp name until profile is filled
+      window.location.href = "profile.html";       // Redirect to complete profile
+    });
+  </script>
+</body>
+</html>
